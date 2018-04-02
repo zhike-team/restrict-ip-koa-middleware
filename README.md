@@ -4,6 +4,19 @@
 
 这个中间件用来限制来访者的 IP 地址，起到类似防火墙的作用。
 
+## 基本用法
+```js
+const Koa = require('koa')
+const restrictIp = require('@zhike/restrict-ip-koa-middleware')
+
+const whitelistRestrict = restrictIp({
+  whitelist: new Set(['2.2.2.2', '3.3.3.3'])
+})
+
+const app = new Koa()
+app.use(whitelistRestrict)
+```
+
 ## 功能
 
 - 白名单通过策略：只有白名单内的 IP 允许访问
@@ -13,9 +26,25 @@
 - 自定义拦截后的处理方法：可以拦截、允许通过、自定义返回消息体
 
 ## 默认行为
--
 
-## TDD
+### 默认取 IP 地址的次序
+如果不设置 trustedHeaderSequence，默认取 IP 地址的次序是：
+1. HTTP header 里的 x-forwarded-for 中最左边的 IP 地址
+2. HTTP header 里的 x-real-ip
+3. 直接 IP，即 ctx.ip
+
+### 默认拦截行为
+如果不设置 onRestrict 方法，需要拦截的时候，默认会抛出一个默认 Error：
+1. 需要拦截的时候，默认抛出 Error
+```js
+let err = new Error('IP restricted');
+err.ip = ipToCheck;
+throw err;
+```
+具有固定的 message: "IP restricted"，另有 ip 字段为被拦截的 IP 地址。
+
+
+## 测试用例
 
 ```
   白名单外网地址
