@@ -69,7 +69,7 @@ module.exports = (options) => {
 
     if (!pass) {
       if (onRestrict) {
-        onRestrict(ctx, next);
+        onRestrict(ctx, next, ipToCheck);
       }
       else {
         let err = new Error('IP restricted');

@@ -41,11 +41,12 @@ const blacklistRestrict = restrictIp({
 
 const customHandlerRestrict = restrictIp({
   blacklist: new Set(blacklist),
-  onRestrict: async (ctx, next) => {
+  onRestrict: async (ctx, next, ip) => {
     if(ctx.query.hasPassport){
       await next()
     }
     else{
+      console.log(ip + ' restricted')
       ctx.status = 403
     }
   }
