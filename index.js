@@ -10,8 +10,8 @@ module.exports = (options) => {
   }
 
   if (options.onRestrict) {
-    if (typeof options.onRestrict !== 'function') {
-      throw new Error('onRestrict must be a function');
+    if (options.onRestrict.constructor.name !== 'AsyncFunction') {
+      throw new Error('onRestrict must be an AsyncFunction');
     }
     onRestrict = options.onRestrict;
   }
@@ -69,7 +69,7 @@ module.exports = (options) => {
 
     if (!pass) {
       if (onRestrict) {
-        onRestrict(ctx, next, ipToCheck);
+        await onRestrict(ctx, next, ipToCheck);
       }
       else {
         let err = new Error('IP restricted');

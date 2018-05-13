@@ -67,6 +67,7 @@ const noTrustedHeaderSequenceRestrict = restrictIp({
 })
 
 async function passed(ctx, next) {
+  ctx.status = 200
   ctx.body = 'passed'
 }
 
@@ -156,7 +157,7 @@ describe('自定义函数拦截', function () {
   })
   it('自定义拦截函数 拦截', async function () {
     let fakeIp = '4.4.4.4'
-    let a = await request(server)
+    await request(server)
       .get('/3')
       .set('x-real-ip', fakeIp)
       .expect(403)

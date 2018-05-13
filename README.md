@@ -35,7 +35,7 @@ app.use(whitelistRestrict)
 | --------              | -----                         | ------ |
 | whitelist             | Set                           | IP 白名单，不能与黑名单同时使用。                            |
 | blacklist             | Set                           | IP 黑名单，不能与白名单同时使用。                            |
-| onRestrict            | function(ctx, next, ipToCheck)| 被拦截后的处理函数，可自定义响应格式，也可以根据情况不做拦截     |
+| onRestrict            | async function(ctx, next, ipToCheck)| 被拦截后的处理函数，可自定义响应格式，也可以根据情况不做拦截     |
 | allowPrivate          | boolean                       | 是否允许内网地址通过，仅能与 whitelist 配合使用。             |
 | trustedHeaderSequence | string[]                      | 从 HTTP Header 中提取 IP 地址的优先级序列。                  |
 
