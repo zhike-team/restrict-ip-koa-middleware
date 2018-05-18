@@ -14,15 +14,15 @@
 
 ## 基本用法
 ```js
-const Koa = require('koa')
-const restrictIp = require('@zhike/restrict-ip-koa-middleware')
+const Koa = require('koa');
+const restrictIp = require('@zhike/restrict-ip-koa-middleware');
 
 const whitelistRestrict = restrictIp({
   whitelist: new Set(['2.2.2.2', '3.3.3.3'])
-})
+});
 
-const app = new Koa()
-app.use(whitelistRestrict)
+const app = new Koa();
+app.use(whitelistRestrict);
 ```
 
 ## option 参数
