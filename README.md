@@ -26,10 +26,6 @@ app.use(whitelistRestrict)
 ```
 
 ## option 参数
-- whitelist：
-- blacklist：
-- onRestrict：，function(ctx, next, ipToCheck)，可自定义任意行为
-- allowPrivate：是否允许，与 whitelist 配合使用
 
 | 参数名                 | 类型                          |  说明  |
 | --------              | -----                         | ------ |
